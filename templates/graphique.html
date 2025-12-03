@@ -1,10 +1,53 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Graphique</title>
-  </head>  
+    <title>Metrique</title>
+    <!-- Chargement de la librairie Google Charts -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  </head>
   <body>
-    <h2>Mon Graphique</h2>
+    <!-- Zone où le graphique sera dessiné -->
+    <div id="chart_div" style="width: 100%; height: 500px;"></div>
+
+    <script>
+      // Chargement du package de graphiques
+      google.charts.load('current', { packages: ['corechart'] });
+      google.charts.setOnLoadCallback(drawBackgroundColor);
+
+      function drawBackgroundColor() {
+
+        // Fonction qui construit et affiche le graphique
+        function drawChart(data) {
+          // Création de la DataTable pour Google Charts
+          var dataTable = new google.visualization.DataTable();
+          dataTable.addColumn('string', 'Date');
+          dataTable.addColumn('number', 'Valeur');
+
+          // Remplir le tableau avec les données de l'API /tawarano/
+          data.results.forEach(entry => {
+            var date = new Date(entry.Jour * 1000); // timestamp -> Date JS
+            dataTable.addRow([date.toLocaleDateString(), entry.temp]);
+          });
+
+          // Options du graphique
+          var options = {
+            title: 'Évolution des températures de la ville de Tawarano',
+            curveType: 'function',
+            legend: { position: 'bottom' }
+          };
+
+          // Dessin du graphique dans la div chart_div
+          var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+          chart.draw(dataTable, options);
+        }
+
+        // Appel de notre API Flask /tawarano/
+        fetch('/tawarano/')
+          .then(response => response.json())
+          .then(data => {
+            drawChart(data);
+          });
+      }
+    </script>
   </body>
 </html>
-
