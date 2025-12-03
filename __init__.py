@@ -46,6 +46,41 @@ def histogramme():
     # Page avec l'histogramme (ColumnChart)
     return render_template("histogramme.html")
 
+@app.route("/commits-data/")
+def commits_data():
+    # Appel de l'API GitHub du dépôt d'origine
+    response = urlopen("https://api.github.com/repos/OpenRSI/5MCSI_Metriques/commits")
+    raw_content = response.read()
+    commits = json.loads(raw_content.decode("utf-8"))
+
+    minutes_count = {}
+
+    for commit in commits:
+        # Récupérer la date : commit -> author -> date
+        date_str = (
+            commit.get("commit", {})
+                  .get("author", {})
+                  .get("date")
+        )
+        if not date_str:
+            continue
+
+        # Exemple de format : "2024-02-11T11:57:27Z"
+        date_object = datetime.strptime(date_str, "%Y-%m-%dT%H:%M:%SZ")
+        minute = date_object.minute
+
+        # Compter le nombre de commits par minute
+        minutes_count[minute] = minutes_count.get(minute, 0) + 1
+
+    # Transformer en liste triée pour le JSON
+    results = [
+        {"minute": minute, "count": count}
+        for minute, count in sorted(minutes_count.items())
+    ]
+
+    return jsonify(results=results)
+
+
 
 @app.route("/")
 def hello_world():
