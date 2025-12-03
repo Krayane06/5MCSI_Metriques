@@ -1,6 +1,7 @@
 from flask import Flask, render_template, jsonify
 import json
 from urllib.request import urlopen
+from datetime import datetime
 
 # sqlite3 et datetime ne sont pas obligatoires pour l'instant
 # mais tu peux les remettre si ton prof les avait demandés :
