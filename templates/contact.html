@@ -1,1 +1,154 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Contact</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #1f2933, #3b82f6);
+        color: #111827;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      .contact-card {
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 30px 35px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        max-width: 450px;
+        width: 90%;
+      }
+
+      .contact-card h1 {
+        margin-top: 0;
+        margin-bottom: 10px;
+        font-size: 26px;
+        text-align: center;
+        color: #111827;
+      }
+
+      .contact-card p.subtitle {
+        margin-top: 0;
+        margin-bottom: 25px;
+        text-align: center;
+        font-size: 14px;
+        color: #6b7280;
+      }
+
+      .form-group {
+        margin-bottom: 18px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 14px;
+        font-weight: 600;
+        color: #374151;
+      }
+
+      input[type="text"],
+      textarea {
+        width: 100%;
+        padding: 10px 12px;
+        border-radius: 8px;
+        border: 1px solid #d1d5db;
+        font-size: 14px;
+        outline: none;
+        box-sizing: border-box;
+      }
+
+      input[type="text"]:focus,
+      textarea:focus {
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+      }
+
+      textarea {
+        min-height: 120px;
+        resize: vertical;
+      }
+
+      .btn-submit {
+        width: 100%;
+        padding: 10px 14px;
+        border-radius: 999px;
+        border: none;
+        background: #3b82f6;
+        color: #ffffff;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.1s ease, box-shadow 0.1s ease,
+          background 0.2s ease;
+      }
+
+      .btn-submit:hover {
+        background: #2563eb;
+        box-shadow: 0 8px 18px rgba(37, 99, 235, 0.5);
+        transform: translateY(-1px);
+      }
+
+      .btn-submit:active {
+        transform: translateY(1px);
+        box-shadow: none;
+      }
+
+      .small-note {
+        margin-top: 10px;
+        font-size: 12px;
+        color: #9ca3af;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="contact-card">
+      <h1>Contactez-moi</h1>
+      <p class="subtitle">
+        Laissez votre nom, prénom et votre message ci-dessous.
+      </p>
+
+      <!-- Ici le formulaire n'est pas réellement traité côté serveur,
+           c'est uniquement pour le design (comme demandé dans l'exercice) -->
+      <form>
+        <div class="form-group">
+          <label for="nom">Nom</label>
+          <input type="text" id="nom" name="nom" placeholder="Votre nom" />
+        </div>
+
+        <div class="form-group">
+          <label for="prenom">Prénom</label>
+          <input
+            type="text"
+            id="prenom"
+            name="prenom"
+            placeholder="Votre prénom"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea
+            id="message"
+            name="message"
+            placeholder="Votre message..."
+          ></textarea>
+        </div>
+
+        <button type="submit" class="btn-submit">Envoyer</button>
+      </form>
+
+      <p class="small-note">
+        (Formulaire non fonctionnel – démo graphique pour l'exercice)
+      </p>
+    </div>
+  </body>
+</html>
 
